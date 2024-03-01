@@ -4,7 +4,7 @@ create database hivetestdb;
 
 use hivetestdb;
 
-
+-- Таблица должностей с информацией о компании, зарплаты, локации и т.д.
 CREATE TABLE IF NOT EXISTS jobs (
       work_year int,
       job_title string,
@@ -24,15 +24,15 @@ MAP KEYS TERMINATED BY ':'
 STORED AS TEXTFILE
 TBLPROPERTIES ("skip.header.line.count"="1");
 
-
+--Таблица компаний
 CREATE table companies AS
 select work_year, company_location, company_size, salary, salary_currency, work_setting  from jobs;
 
-
+--Таблица зарплат по компниям
 create table country_salary as
 select company_location, work_year, salary as salary from companies;
 
-
+--Таблица расположении должностей
 CREATE table jobs_location AS
 SELECT job_title, job_category, company_location, work_year from jobs;
 

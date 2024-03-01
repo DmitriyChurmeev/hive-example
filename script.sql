@@ -76,6 +76,8 @@ select DISTINCT salary from companies where company_location = 'United States' a
 UNION 
 select DISTINCT salary from companies where company_location = 'United Kingdom' and work_setting = 'Hybrid'
 
+-- Попытаемся понять популярность должностей по компаниям
+SELECT job_title, RANK() OVER(order by company_location) as rank_job from jobs order by rank_job DESC ;
 
 docker-compose down
 docker system prune -a
